@@ -1,6 +1,6 @@
-# gh_flutter
+# Listing Flutter App
 
-A new Flutter application.
+A new Flutter application for basic understanding.
 
 ## Getting Started
 
