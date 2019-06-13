@@ -52,16 +52,22 @@ class GHFlutterState extends State<GHFlutter> {
       final membersJSON = json.decode(response.body);
 
       for( var memberJSON in membersJSON){
-        final member=new Member(memberJSON["login"]);
+        final member= Member(memberJSON["login"], memberJSON["avatar_url"]);
         _members.add(member);
       }
     });
   }
 
   Widget _buildRow(int i) {
-    return ListTile(
-      title: new Text("${_members[i].login}", style: _biggerfont,),
-
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: ListTile(
+        title: Text("${_members[i].login}",style: _biggerfont),
+        leading: CircleAvatar(
+          backgroundColor: Colors.green,
+          backgroundImage: NetworkImage(_members[i].avatarUrL),
+        ),
+      ),
     );
   }
 }
@@ -75,6 +81,11 @@ class Member {
     if (login == null) {
       throw new ArgumentError("login of Member cannot be null. "
           "Received: '$login'");
+    }
+
+    if(avatarUrL==null) {
+      throw ArgumentError("avatar of Member cannot be Null"
+          "Received: '$avatarUrL'");
     }
   }
 }
